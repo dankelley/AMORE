@@ -4,6 +4,7 @@ decimate <- FALSE
 
 library(oce) # for imagep(), faster than image()
 data(coastlineWorldFine, package="ocedata")
+data(topoWorld)
 load("EMAG2_V3_20170530.rda") # emag2 holds lon, lat, sealevel and upcont
 
 # Subset to Nova Scotia region
@@ -24,8 +25,10 @@ if (!interactive()) png("sealevel_ns_monochrome.png",
 imagep(lon, lat, sealevel,
     asp=asp, decimate=decimate, drawTriangles=TRUE,
     zlim=quantile(sealevel, c(0.01, 0.99), na.rm=TRUE))
+contour(topoWorld[["longitude"]]+360, topoWorld[["latitude"]], -topoWorld[["z"]], level=200, add=TRUE)
 lines(coastlineWorldFine[["longitude"]]+360, coastlineWorldFine[["latitude"]],
     col="magenta", lwd=2)
+points(360-(64+13/60), 42+53/60, col="magenta", cex=3, lwd=2) # Montagnais crater
 mtext("sealevel")
 if (!interactive()) dev.off()
 
@@ -34,8 +37,10 @@ if (!interactive()) png("upcont_ns_monochrome.png",
 imagep(lon, lat, upcont,
     asp=asp, decimate=decimate, drawTriangles=TRUE,
     zlim=quantile(upcont, c(0.01, 0.99), na.rm=TRUE))
+contour(topoWorld[["longitude"]]+360, topoWorld[["latitude"]], -topoWorld[["z"]], level=200, add=TRUE)
 lines(coastlineWorldFine[["longitude"]]+360, coastlineWorldFine[["latitude"]],
     col="magenta", lwd=2)
+points(360-(64+13/60), 42+53/60, col="magenta", cex=3, lwd=2) # Montagnais crater
 mtext("upcont")
 if (!interactive()) dev.off()
 

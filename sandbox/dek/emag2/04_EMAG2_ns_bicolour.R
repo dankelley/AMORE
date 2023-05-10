@@ -1,4 +1,5 @@
 library(oce) # for imagep(), faster than image()
+data(topoWorld)
 library(cmocean)
 
 # Note that decimate=FALSE to avoid decimating
@@ -31,7 +32,9 @@ if (!interactive()) png("sealevel_ns_bicolour.png",
     unit="in", width=7, height=6.67, res=300, pointsize=11)
 imagep(lon, lat, sealevel, colormap=cm,
     asp=asp, decimate=decimate, drawTriangles=TRUE)
+contour(topoWorld[["longitude"]]+360, topoWorld[["latitude"]], -topoWorld[["z"]], level=200, add=TRUE)
 lines(coastlineWorldFine[["longitude"]]+360, coastlineWorldFine[["latitude"]], lwd=1.8)
+points(360-(64+13/60), 42+53/60, col="magenta", cex=3, lwd=2) # Montagnais crater
 mtext("sealevel")
 if (!interactive()) dev.off()
 
@@ -39,7 +42,9 @@ if (!interactive()) png("upcont_ns_bicolour.png",
     unit="in", width=7, height=6.67, res=300, pointsize=11)
 imagep(lon, lat, upcont, colormap=cm, drawTriangles=TRUE,
     asp=asp, decimate=decimate)
+contour(topoWorld[["longitude"]]+360, topoWorld[["latitude"]], -topoWorld[["z"]], level=200, add=TRUE)
 lines(coastlineWorldFine[["longitude"]]+360, coastlineWorldFine[["latitude"]], lwd=1.8)
+points(360-(64+13/60), 42+53/60, col="magenta", cex=3, lwd=2) # Montagnais crater
 mtext("upcont")
 if (!interactive()) dev.off()
 
