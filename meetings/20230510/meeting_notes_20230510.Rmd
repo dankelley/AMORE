@@ -12,15 +12,24 @@ Clark Richards, while "group" indicates group discussion^[Please note that
 individuals in the AMORE group will not be named in meeting notes without
 permission.].
 
-Most of the time was spent with DEK talking about working with github.com and,
-more generally, with git.  In this he was helped greatly by CGR.
+*Topic 1.* Most of the time was spent with DEK talking about working with
+github.com and, more generally, with git.  In this he was helped greatly by CGR.
+After the meeting, DEK made a video (available at https:
+//www.dropbox.com/s/xt5x9djdjpoglsw/amore_meeting_2_followup_2.mp4?dl=0) that is
+much, much simpler method using the GitHub Desktop application.  This
+application may be downloaded for free from github.com, and AMORE members
+may find that it is ideal for initial work with git, because it greatly reduces
+the need to remember git commands.
 
-A second topic was to show code in sandbox/dek/emag2, which deals with earth
-magnetic anomaly data.  DEK showed the R files one by one (noting that their
-names sort to give the order of working).  It is not possible for others to
-follow the steps because DEK did not include in the repo the large `.rda` file
-that is required for this work.  That file could be put on Dropbox if anyone
-wants ... just email DEK.
+*Topic 2.* DEK showed code in sandbox/dek/emag2, which deals with earth magnetic
+anomaly data.  DEK showed the R files one by one (noting that their names sort
+to give the order of working).  It is not possible for others to follow the
+steps because DEK did not include in the repo the large `.rda` file that is
+required for this work.  That file could be put (temporarily) on Dropbox if
+anyone wants ... just email DEK.  Note that DEK made some other magnetic declination
+images after the meeting, and the source code for them is available in the
+above-named directory.
+
 
 **Plans**
 
