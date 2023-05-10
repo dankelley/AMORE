@@ -1,0 +1,34 @@
+---
+title: Notes from AMORE meeting 1
+date: 2023-05-10
+output: pdf_document
+author: Dan Kelley (he, him)
+---
+
+**Summary**
+
+About 15 individuals were present. In these notes, DEK is Dan Kelley and CGR is
+Clark Richards, while "group" indicates group discussion^[Please note that
+individuals in the AMORE group will not be named in meeting notes without
+permission.].
+
+Most of the time was spent with DEK talking about working with github.com and,
+more generally, with git.  In this he was helped greatly by CGR.
+
+A second topic was to show code in sandbox/dek/emag2, which deals with earth
+magnetic anomaly data.  DEK showed the R files one by one (noting that their
+names sort to give the order of working).  It is not possible for others to
+follow the steps because DEK did not include in the repo the large `.rda` file
+that is required for this work.  That file could be put on Dropbox if anyone
+wants ... just email DEK.
+
+**Plans**
+
+In the next meeting, DEK will discuss regression, both linear and nonlinear.
+The focus will be not just on the R functions that do these things, but also on
+the theory behind them.  That theory is essential to do quite a lot of nonlinear
+curve fitting, in particular.
+
+**Resources**
+
+After the meeting, DEK made a little video, which will be put in Dropbox, at
