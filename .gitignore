@@ -1,2 +1,8 @@
 *.pdf
+*.png
+*.rda
+*.csv
+*.out
+.DS_Store
+*~
 

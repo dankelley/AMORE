@@ -1,0 +1,46 @@
+---
+title: Notes from AMORE meeting 1
+date: 2023-05-03
+output: pdf_document
+author: Dan Kelley (he, him)
+---
+
+**Summary**
+
+About 10 individuals were present. In these notes, DEK is Dan Kelley and CGR is
+Clark Richards, while "group" indicates group discussion^[Please note that
+individuals in the AMORE group will not be named in meeting notes without
+permission.].
+
+The meeting began with everyone in the room stating their name, a bit about
+their research, and something about R that they would like to discuss through
+the course of this and future meetings.  This revealed a good diversity of skill
+levels, research interests, and seniority.
+
+Then, DEK showed a list of potential topics that he had prepared before the
+meeting.  The original R-markdown source for that document was shown, as a way
+to point out that R-markdown (and plain markdown) is not just very readable, but
+also also really quite useful in creating formatted documents.
+
+Discussion was agreeably lively throughout the session, touching for example on
+the following topics. (Initials indicate main speakers.)
+
+* Use of (paper) notebooks (DEK).
+* Good choices for file names (DEK and CGR).
+* The terminal and Unix tools (DEK and CGR).
+* The markdown file format, and why it is so useful (DEK and CGR).
+* The zotero citation manager (DEK).
+* How to decide when to update R and packages (group).
+* CRAN policies regarding inter-package compatibility etc (group).
+
+**Plans**
+
+In the next meeting, DEK will will provide a concrete example of using git, by
+creating a repository for the AMORE project on the github.com website.
+
+**Resources**
+
+After the meeting, I made a little video about some unix commands.  It is at the
+link below (the link will be removed once AMORE is completed, in June).
+
+https://www.dropbox.com/s/ucu0rhfbr13281h/amore_01_files_directories_markdown_and_vim.mp4?dl=0
