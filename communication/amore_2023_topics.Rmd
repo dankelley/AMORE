@@ -1,0 +1,53 @@
+---
+title: "AMORE: ad-hoc minicourse on R (etc) -- topic ideas"
+author: Dan Kelley (dan.kelley@dal.ca)
+date: Riley Room from 1000h-1100h Wednesdays in May 2023
+output: pdf_document
+---
+
+The checklist is updated after each AMORE meeting.
+
+### General advice
+
+* [x] why use paper notebooks?
+* [x] how to choose good names for files and directories?
+* [x] benefits of using plain-text editors (e.g. vim, emacs, etc.)
+* [x] markdown and Rmarkdown document formats
+* [ ] revision-tracking with `git` and `github.com`
+
+### Unix tools
+
+* [x] directory navigation: `cd`, `pwd`, `ls`
+* [ ] \": `pushd`
+* [ ] file investigation (beginner): `cat`, `head`, `tail`, `less`
+* [ ] \" (advanced): `grep`
+* [ ] job control: `make`, `tmux`
+
+### R language
+
+*General*
+
+* [x] `?` is your friend
+* [x] R $\ne$ RStudio
+* [ ] base R vs `dplyr`, `ggplot2`, et al.
+* [ ] objects, loops, functions
+* [ ] `|>`, `_`, and `\()`
+
+*Common functions*
+
+* [ ] `plot()` et al.
+* [ ] `read.*()`
+* [ ] `ifelse()`
+* [ ] `subset()`
+* [ ] `lapply()`
+
+*Specialized functions*
+
+* [ ] `lm()` and `nls()`
+* [ ] `uniroot()`, `optim()`, and `integrate()`
+
+### Special topics
+
+* [ ] netcdf files
+* [ ] visualization
+* [ ] matrices

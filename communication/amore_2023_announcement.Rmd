@@ -1,0 +1,28 @@
+---
+title: "AMORE: ad-hoc minicourse on R (etc)"
+author: Dan Kelley (dan.kelley@dal.ca)
+date: Riley Room from 1000h-1100h Wednesdays in May 2023
+---
+
+With (*ahem*) a few years of experience in R, unix computing, and research
+organization, I have a few tricks up my sleeve.  I'd be happy to talk about
+these and related things to summer students (and others), if
+there is sufficient interest.
+
+I have booked the Riley room for Wednesdays from 1000h to 1100h through the
+month of May. Please let me know if you're interested. Come with a laptop. After
+one or two sessions, we can move on to particular projects with which you might
+need advice -- for that, please let me know a few days beforehand. (I am not
+interested in ANOVA or the tidyverse, so please don't bring these up.)
+
+This will not be a course. Your supervisor cannot tell you to attend. There will
+be no credit. There will be no tests. I might assign some homework, through, if
+I think that will help you!
+
+I am suggesting Wednesdays so you will have some time at the start of the week
+to try to figure something out, knowing that you'll be able to ask me and others
+in the group after a day or so.
+
+If this proves to be useful, even just as a weekly get-together for nerdy chats,
+I could ask the department to book the room for the whole summer.
+
