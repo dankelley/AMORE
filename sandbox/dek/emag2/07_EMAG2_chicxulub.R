@@ -39,6 +39,6 @@ imagep(lon, lat, upcont, colormap=cm, drawTriangles=TRUE,
     asp=asp, decimate=decimate)
 lines(coastlineWorldFine[["longitude"]]+360, coastlineWorldFine[["latitude"]], lwd=1.8)
 points(lon0, lat0, col="magenta", cex=3, lwd=2)
-mtext("upcont")
+mtext(paste0("Magnetic Anomaly (magenta circle at ", name, ")"))
 if (!interactive()) dev.off()
 
