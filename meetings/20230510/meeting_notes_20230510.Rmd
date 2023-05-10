@@ -31,4 +31,7 @@ curve fitting, in particular.
 
 **Resources**
 
-After the meeting, DEK made a little video, which will be put in Dropbox, at
+After the meeting, DEK made a little video, illustrating git work and R-markdown format,
+by writing the present document.  (There a few minutes of watching typing, with no words
+spoken.  Oh, the drama of it all!)  The video is at
+https://www.dropbox.com/s/ndw95kqh4m5ob6q/amore_meeting_2_followup.mp4?dl=0
