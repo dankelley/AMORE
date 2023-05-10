@@ -13,7 +13,7 @@ The checklist is updated after each AMORE meeting.
 * [x] how to choose good names for files and directories?
 * [x] benefits of using plain-text editors (e.g. vim, emacs, etc.)
 * [x] markdown and Rmarkdown document formats
-* [ ] revision-tracking with `git` and `github.com`
+* [x] revision-tracking with `git` and `github.com`
 
 ### Unix tools
 
@@ -36,10 +36,11 @@ The checklist is updated after each AMORE meeting.
 *Common functions*
 
 * [ ] `plot()` et al.
-* [ ] `read.*()`
+* [x] `read.csv()` etc
 * [ ] `ifelse()`
 * [ ] `subset()`
 * [ ] `lapply()`
+* [x] indexing with `[]`
 
 *Specialized functions*
 
@@ -49,5 +50,8 @@ The checklist is updated after each AMORE meeting.
 ### Special topics
 
 * [ ] netcdf files
-* [ ] visualization
-* [ ] matrices
+* [x] visualization: colour schemes, `png()`, `imagep()`, `lines()`.
+* [x] visualization: `coplot()`, `contour()`, `boxplot()`, `spectrum()`
+* [x] matrices: assembling, indexing
+* [ ] matrices: transpose, eigenvalues, ...
+
