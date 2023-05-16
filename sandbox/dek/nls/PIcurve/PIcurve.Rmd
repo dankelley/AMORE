@@ -1,0 +1,91 @@
+---
+title: Photosynthesis Irradiance Curve Fitting
+date: 2023-05-15
+author: Dan Kelley (member of the AMORE group)
+output: html_document
+runtime: shiny
+---
+
+# Background
+
+Jassby and Platt (1976) recommend using the empirical formula.
+
+\begin{equation}
+P = P_{m} \tanh(\alpha I / P_{m})
+\end{equation}
+
+\noindent to model the dependence of photosynthetic rate, $P$, on solar
+incidence, $I$.
+
+
+An example of such a curve is Figure 4b of Platt et al. (1980), shown below.
+
+![Figure 4b from Platt et al. (1980)](platt1980fig4b.png)
+
+# Simulator
+
+```{r echo=FALSE}
+# Jassby and Platt's (1976) recommended formula
+PI <- function(I, Pm, alpha)
+{
+    Pm * tanh(alpha * I / Pm)
+}
+
+fluidRow(
+    column(3, sliderInput("n",     "# points:", 20,   min=5,   max=50, step=1)),
+    column(3, sliderInput("Pm",    "Pm:",       10,   min=0.5, max=20, step=0.1)),
+    column(3, sliderInput("alpha", "alpha:",     5,   min=1,   max=20, step=0.1)),
+    column(3, sliderInput("sd",    "Noise:",     0.5, min=0.1, max=2,  step=0.01)))
+
+renderPlot(
+    {
+        # Fake data
+        I <- seq(0, 10, length.out=input$n)
+        Pm <- input$Pm
+        alpha <- input$alpha
+        P <- PI(I, Pm, alpha) + rnorm(length(I), sd=input$sd)
+
+        # Fit model
+        m <- nls(P ~ Pm*tanh(alpha * I / Pm), start=list(Pm=5, alpha=1))
+
+        # Find coefficients and (maybe) confidence intervals.
+        # EXERCISE: use try() on the nls() call also.
+        CI <- list()
+        CItrial <- try({confint(m)}, silent=TRUE)
+        if (!inherits(CItrial, "try-error")) {
+            CI$Pm <- diff(CItrial[1,])/2
+            CI$alpha <- diff(CItrial[2,])/2
+        }
+
+        # Display results
+        par(mar=c(3, 10, 3, 10), mgp=c(2, 0.7, 0)) # tighten margins
+        plot(I, P, pch=20,
+            xlab="Irradiance (arbitrary units)",
+            ylab="Photosynthesis (arbitrary units)")
+        grid()
+        lines(I, predict(m), lwd=2)
+        label <- if (length(CI) == 2) {
+            sprintf("Pm=%.2f\u00B1%.2f, \u03B1=%.2f\u00B1%.2f",
+                coef(m)[1], CI$Pm, coef(m)[2], CI$alpha)
+        } else {
+            sprintf("Pm=%.2f, \u03B1=%.2f",
+                coef(m)[1], coef(m)[2])
+        }
+        legend("bottomright", pch=c(20,NA), lwd=c(NA, 2),
+            legend=c("Simulated Data", label), cex=0.9)
+    }, height=500, pointsize=18)
+```
+
+# References
+
+* Jassby, Alan D., and Trevor Platt. “Mathematical Formulation of the
+  Relationship between Photosynthesis and Light for Phytoplankton:
+  Photosynthesis-Light Equation.” Limnology and Oceanography 21, no. 4 (July
+  1976): 540–47.
+  https://doi.org/10.4319/lo.1976.21.4.0540
+
+* Platt, T, C. L. Gallegos, and W. G. Harrison. “Photoinhibition of
+  Photosynthesis in Natural Assemblages of Marine Phytoplankton.” Journal of
+  Marine Research 38, no. 4 (March 8, 1980): 687–701.
+  https://images.peabody.yale.edu/publications/jmr/jmr38-04-06.pdf
+
