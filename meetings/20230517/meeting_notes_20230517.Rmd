@@ -1,0 +1,34 @@
+---
+title: Notes from AMORE meeting 3
+date: 2023-05-17
+output: pdf_document
+author: Dan Kelley (he, him)
+---
+
+**Summary**
+
+About FIXME:xx individuals were present. In these notes, DEK is Dan Kelley and CGR is
+Clark Richards, while "group" indicates group discussion^[Please note that
+individuals in the AMORE group will not be named in meeting notes without
+permission.].
+
+The main topic was regression, or curve-fitting, and the subtopics were as follows.
+
+1. Regression as an optimization procedure: least-squares vs other cost
+   functions, restriction of typically taught least-squares linear regression,
+   difficulty of multiple minima, ill-constrained estimation, etc.
+2. Linear regression of least-squares type: `lm()` and associated functions
+   `summary()`, `plot()`, `coef()`, `predict()` and `confint()`.
+3. Nonlinear regression: difficulties and how to avoid them, a shiny-enabled
+   notebook for exploration.
+
+**Plans**
+
+In the next (4th) meeting, DEK will discuss FIXME.  After that, the 5th meeting
+will involve FIXME.  The 5-week plan having been carried out, AMORE may still
+continue through June and July if there is interest in active meetings involving
+presentations by other group members, or question/answer meetings.
+
+**Resources**
+
+After the meeting, DEK made a little video, illustrating FIXME, available at FIXME.
