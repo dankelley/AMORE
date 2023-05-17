@@ -37,19 +37,17 @@ x <- seq(0,2*pi, pi/16) #By sequence
 x
 ```
 
-```{r}
-y <- sin(x) 
-```
-
-# Including Plots
+# Plots
 
 Plot $x$, $y$:
 
 ```{r}
+x <- seq(0,2*pi, pi/16) #Assign x
+y <- sin(x) #Assign y based on some value x
 plot(x,y) 
 ```
 
-# Plot aesthetics
+## Plot aesthetics
 
 ```{r}
 plot(x,y, type="l")
@@ -57,30 +55,40 @@ grid()
 lines(x,y,col=2, lwd=3)
 ```
 
-# Plot margin controls
+## Plot margin controls
 
 ```{r}
-par("mar")
-par(mar=c(3,3,1,1))
+par(mar=c(3,3,1,1)) #A numerical vector of the form c(bottom, left, top, right)
 ```
 
 ```{r}
-par(mar=c(3,3,1,1), mgp=c(2,0.7,0))
+par(mgp=c(2,0.7,0)) #The margin line (in mex units) for the axis title, axis labels and axis line.
+```
+
+```{r}
+par(mgp=c(2,0.7,0), mar=c(3,3,1,1)) #Ensure to call 'par()' before 'plot()'
 plot(x,y)
 ```
 
-# Generate Data
+# Linear Regression
+
+Some brief, but important statistics background on linear regression:
+
+Assumptions for the model of linear regression are primarily on errors. This essentially means that the average error is zero and the errors are independent and homoscedastic (uniform variance).
+
+## Generate some data
 
 ```{r}
-x <- 1:10
+#Generate some data 
+x <- 1:10 
 y <- 2+3*x
 ```
 
-```{r}
+```{r ,echo=F}
 plot(x,y)
 ```
 
-# Add noise to data
+## Add noise to data
 
 ```{r}
 noise <- rnorm(x, mean=0,sd=3)
@@ -91,46 +99,71 @@ y <- y+noise
 plot(x,y)
 ```
 
-# Linear Regression
+## Using lm()
 
-Consider the statistics printed in the regression summary (residuals, p-value, f-statistic)
+Suppose we want to fit a linear regression model with response 'y' and covariate 'x' to the data we just generated.
+
+Call the linear regression function 'lm' in R by:
 
 ```{r}
-m <- lm(y~x)
-summary(m)
+m <- lm(y~x) #Store the linear model output in variable 'm'
 ```
 
-# Diagnostic Plots
+We can evaluate the output of our linear model by calling the variable $m$.
 
-Utilized to evaluate the quality of the regression model $m$ as a predictor of our dataset
+```{r}
+m #Call and Coefficients
+summary(m) #Detailed summary
+```
+
+Consider the statistics printed in the regression summary (residuals, p-value, f-statistic, etc. These statistics provide important information and are used to validate our regression.)
+
+## Diagnostic Plots
+
+For our regression results to be valid, we need to check our assumptions. How can we check assumptions on our random error?
+
+Essentially, diagnostic plots are utilized to evaluate the performance of the regression model $m$.
 
 ```{r}
 plot(m)
 ```
 
-# Confidence Intervals
+## Confidence Intervals
+
+We cam compute the 95% t CI of the slope of this linear regression.
 
 ```{r}
-confint(m)
+confint(m, level=0.95)
 ```
 
-# Adding our linear model to the plot
+## Extracting Coefficients
+
+```{r}
+coef(m)[1] #Intercept
+coef(m)[2] #Slope
+
+coef(m) #Intercept and slope
+```
+
+## Adding our linear model to the plot
 
 ```{r}
 plot(x,y)
-grid()
-mtext(paste("model:" ,round(coef(m)[1],2), "+", round(coef(m)[2],2), "*x"))
-abline(m)
-abline(a=1,b=3, lty=2)
+grid() #Add a grid
+mtext(paste("model:" ,round(coef(m)[1],2), "+", round(coef(m)[2],2), "*x")) #Paste the model coefficients onto the plot
+abline(m) #Add the regression line onto the plot 
+lines(predict(m), lty=2, lwd=3) #Add prediction based on regression
 ```
 
 # Non-linear Regression
 
--   Where $y=xe^-$$^x$
+-   Think first! Get to know your data. Plot your data and decide on good starting values before calling the nls() function.
 
--   We can manipulate $y$ through log-transformations
+-   Eg. Where $y=x^A$
 
-    -   Knowing $logy = A log y$ we can apply a transformation to yield $y = A x$
+    -   We can manipulate $y$ through log-transformations
+
+    -   Let $\hat{y}=logy$, $\hat{x}=logx$. We can apply the log transformation to yield $y = A x$
 
 ```{r}
 x <- seq(0,10,length.out=50)
@@ -143,7 +176,7 @@ y <- A*x*exp(-x/B)
 plot(x,y)
 ```
 
-# Using nls()
+## Interpreting common nls() error codes
 
 ```{r, error=T}
 nls(y~A*x*exp(-x/B))
@@ -152,31 +185,84 @@ nls(y~A*x*exp(-x/B))
 No initial value provided to the function
 
 ```{r, error=T}
-# y <- y+rnorm(x,sd=0.05)
-nls(y~A*x*exp(-x/B), start=list(A=1,B=40))
+nls(y~A*x*exp(-x/B), start=list(A=1.035,B=4.834))
 ```
 
-Function fits too well?
+Function fits 'too' well
 
-```{r}
-y <- y+rnorm(x,sd=0.05)
+```{r, error=T}
 nls(y~A*x*exp(-x/B), start=list(A=1,B=40))
 ```
 
 Bad estimate for A or B coefficients
 
-# Using nls()
+## Using nls()
+
+Suppose we want to fit a linear regression model with response 'y' and covariate 'x' to the data we just generated.
+
+Call the nonlinear regression function 'nls' in R by:
 
 ```{r}
-y <- y+rnorm(x,sd=0.05)
-nls(y~A*x*exp(-x/B), start=list(A=1,B=4))
-```
-
-## Store and Evaluate nonlinear model
-
-```{r}
+y <- y+rnorm(x,sd=0.05) #add noise to the data
 mnonlinear  <- nls(y~A*x*exp(-x/B), start=list(A=1,B=4))
-coef(mnonlinear)
-confint(mnonlinear)
-predict(mnonlinear)
 ```
+
+We can evaluate the output of our nonlinear model by calling the variable $m$.
+
+```{r}
+mnonlinear #Call and Coefficients
+summary(mnonlinear) #Detailed summary
+```
+
+We can perform the majority of statistical operations on nls() models that we can on lm() models:
+
+##Extracting Coefficients
+```{r}
+coef(mnonlinear)[1] #Intercept
+coef(mnonlinear)[2] #Slope
+
+coef(mnonlinear) #Intercept and slope
+```
+
+We cam compute the 95% t CI of the slope of this nonlinear regression.
+```{r}
+confint(mnonlinear, level=0.95)
+```
+
+## Residual sum of squares
+```{r}
+RSS.p <- sum(residuals(mnonlinear)^2)
+```
+
+## Total sum of squares
+```{r}
+(TSS <- sum((y - mean(y))^2))  
+```
+
+## R-squared measure
+```{r}
+1 - (RSS.p/TSS)  
+```
+
+## Diagnostic Plot
+For nonlinear regression, we can only use the residuals vs. fitted plot to evaluate the model.  
+
+```{r}
+mean(resid(mnonlinear))
+```
+
+```{r, echo=F} 
+plot(mnonlinear$m$fitted(),mnonlinear$m$resid())
+```
+
+
+##Adding our nonlinear model to the plot
+```{r}
+plot(x,y)
+grid() #Add a grid
+mtext(paste("model:" ,round(coef(mnonlinear)[1],2), "*x", "*exp(-x/", round(coef(mnonlinear)[2],2), ")")) #Paste the model coefficients onto the plot
+
+s <- seq(from = min(x), to= max(x), length = length(x))
+lines(s, predict(mnonlinear, list(x = s)), lty=3, lwd=2) #Add prediction based on regression 
+```
+
