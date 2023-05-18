@@ -1,0 +1,19 @@
+---
+title: CTD plotter
+date: 2023-05-24
+author: Dan Kelley (member of the AMORE group)
+output: html_document
+runtime: shiny
+---
+
+```{r echo=FALSE}
+library(oce)
+dir <- "~/data/arctic/beaufort/2012"
+files <- list.files(dir, ".cnv")
+selectInput(inputId="file", label=sprintf("Select CNV file within %s", dir), choices=files)
+renderPlot(
+    {
+        d <- read.oce(paste0(dir, "/", input$file))
+        plot(d)
+    }, height=600, pointsize=18)
+```

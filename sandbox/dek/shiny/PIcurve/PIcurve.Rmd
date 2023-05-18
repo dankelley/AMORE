@@ -3,12 +3,13 @@ title: Photosynthesis Irradiance Curve Fitting
 date: 2023-05-24
 author: Dan Kelley (member of the AMORE group)
 output: html_document
+bibliography: PI.bib
 runtime: shiny
 ---
 
 # Background
 
-Jassby and Platt (1976) recommend using the empirical formula.
+@jassby_mathematical_1976 recommend using the empirical formula.
 
 \begin{equation}
 P = P_{m} \tanh(\alpha I / P_{m})
@@ -16,12 +17,12 @@ P = P_{m} \tanh(\alpha I / P_{m})
 
 \noindent to model the dependence of photosynthetic rate, $P$, on solar
 irradiance, $I$.  Note that this formula is only for what is called the "non
-quenched" case, in which $P$ remains constant once it reaches its peak value at
-a certain irradiance.
+quenched" case, in which $P$ asymptotes to a constant with increasing $I$.
 
-An example of such a curve is Figure 4b of Platt et al. (1980), shown below.
+An example of such a curve is Figure 4b of @platt_photoinhibition_1980, as
+shown below.
 
-![Figure 4b from Platt et al. (1980)](platt1980fig4b.png){width="80%"}
+![](platt1980fig4b.png){width="80%"}
 
 # Simulator
 
@@ -90,15 +91,4 @@ renderPlot(
 ```
 
 # References
-
-* Jassby, Alan D., and Trevor Platt. “Mathematical Formulation of the
-  Relationship between Photosynthesis and Light for Phytoplankton:
-  Photosynthesis-Light Equation.” Limnology and Oceanography 21, no. 4 (July
-  1976): 540–47.
-  https://doi.org/10.4319/lo.1976.21.4.0540
-
-* Platt, T, C. L. Gallegos, and W. G. Harrison. “Photoinhibition of
-  Photosynthesis in Natural Assemblages of Marine Phytoplankton.” Journal of
-  Marine Research 38, no. 4 (March 8, 1980): 687–701.
-  https://images.peabody.yale.edu/publications/jmr/jmr38-04-06.pdf
 
