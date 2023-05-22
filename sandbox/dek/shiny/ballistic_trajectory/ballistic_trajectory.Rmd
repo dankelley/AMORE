@@ -58,7 +58,7 @@ ui <- fluidPage(titlePanel(title="", windowTitle="River Transit"),
                 label="Speed [m/s]")),
         column(3, sliderInput("angle", value=20.0, min=0, max=90.0, step=0.1,
                 label="Angle [deg]")),
-        column(3, sliderInput("lambda", value=0.001, min=0, max=0.5, step=0.0005,
+        column(3, sliderInput("lambda", value=0.0015, min=0, max=0.01, step=0.0005,
                 label="Friction Coef. [kg/m]")),
         ),
     fluidRow(plotOutput("plot", height="300")))
@@ -108,11 +108,12 @@ server <- function(input, output, session)
         # Plot
         par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
         plot(x, z, type="l", lwd=2,
-            ylim=c(0, 1.04*max(z)), xaxs="i", yaxs="i", xlab="Horizontal coordinate, x [m]", ylab="Vertical coordinate, z [m]")
+            ylim=c(0, 1.04*max(z)), xaxs="i", yaxs="i",
+            xlab="Horizontal coordinate, x [m]", ylab="Vertical coordinate, z [m]")
         abline(h=0, col="tan")
         grid()
         if (landed)
-            mtext(sprintf("Landed at x=%.2fm after %.1fs", xstar, tstar))
+            mtext(paste0("Travelled ", round(xstar, 3), " m in ", round(tstar, 2), " s"))
     }, height="auto", pointsize=15)
 }
 
