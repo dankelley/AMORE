@@ -60,7 +60,7 @@ ui <- fluidPage(titlePanel(title="", windowTitle="River Transit"),
         column(3, sliderInput("angle", value=20.0, min=0, max=90.0, step=0.1,
                 label="Angle [deg]")),
         column(2, sliderInput("lambda", value=0.0015, min=0, max=0.01, step=0.0005,
-                label="Friction kg/m]")),
+                label="Friction [kg/m]")),
         column(2, checkboxInput("naturalScale", "Natural Scaling", TRUE))),
     fluidRow(plotOutput("plot", height="300")))
 
