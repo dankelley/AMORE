@@ -108,11 +108,14 @@ server <- function(input, output, session)
         }
         # Plot
         par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
-        plot(x, z, type="l", lwd=2,
+        plot(x, z, type="l", lwd=4, col=4,
             asp=if (input$naturalScale) 1 else NULL,
             ylim=c(0, 1.04*max(z)), xaxs="i", yaxs="i",
             xlab="Horizontal coordinate, x [m]", ylab="Vertical coordinate, z [m]")
-        abline(h=0, col="tan")
+        if (input$naturalScale) {
+            usr <- par("usr")
+            rect(usr[1], usr[3], usr[2], 0, col="tan")
+        }
         grid()
         if (landed)
             mtext(paste0("Travelled ", round(xstar, 3), " m in ", round(tstar, 2), " s"))
