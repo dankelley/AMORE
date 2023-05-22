@@ -25,8 +25,9 @@ recreational game of toss.)
 
 Try adjusting the sliders to address questions like the following.  You may find
 it helpful to start with the case of zero friction.  Then, adjust the friction
-coefficient to match an application of interest, and try revisiting some of your
-analysis.
+coefficient to consider other situations of interest, e.g. table tennis or
+badminton.  It may be necessary to adjust the code (i.e. the limits on the
+sliders) to address some situations.
 
 1. Adjusting just the angle slider, find the direction that will make the object
    land exactly 10 m away.
