@@ -69,7 +69,7 @@ server <- function(input, output, session)
 {
     output$plot <- renderPlot({
         # Dynamical function for y=c(x, z, u, w)
-        func <- function(t, y, parms)
+        dynamics <- function(t, y, parms)
         {
             x <- y[1]
             z <- y[2]
@@ -82,19 +82,19 @@ server <- function(input, output, session)
                     dwdt=-parms$g - parms$lambda*w*U/parms$m))
         }
         # set up parameters
-        parms <- list(g=9.8, m=input$m, lambda=input$lambda)
+        parameters <- list(g=9.8, m=input$m, lambda=input$lambda)
         # Set up initial conditions (i.e. initial location)
-        IC <- c(0, 0, input$U*cos(input$angle*pi/180), input$U*sin(input$angle*pi/180))
+        initialConditions <- c(0, 0, input$U*cos(input$angle*pi/180), input$U*sin(input$angle*pi/180))
         # Establish reporting times.
-        times <- seq(0, 100, 0.01)
-        # Solve the DE
-        sol <- lsoda(IC, times, func, parms=parms)
+        reportTimes <- seq(0, 100, 0.01)
+        # Solve the differential equations
+        sol <- lsoda(y=initialConditions, times=reportTimes, func=dynamics, parms=parameters)
         t <- sol[, 1]
         x <- sol[, 2]
         z <- sol[, 3]
-        # Interpolate to ground level, y=0
+        # Interpolate to the ground strike at y=0, if the object fell below that level
         i <- which(z < 0)[1]
-        landed <- length(i) == 1 && is.finite(i)
+        landed <- length(i) == 1 && is.finite(i) && i > 1L
         if (landed) {
             slope <- (z[i]-z[i-1]) / (x[i]-x[i-1])
             xstar <- x[i-1] - z[i-1] / slope
