@@ -15,3 +15,8 @@ View CTD files selected with a pulldown menu.
 
 Interactive simulation of the trajectory of a boat crossing
 a flowing river at constant heading and speed.
+
+# `ballistic_trajectory`
+
+Interactive simulation of a thrown object.
+

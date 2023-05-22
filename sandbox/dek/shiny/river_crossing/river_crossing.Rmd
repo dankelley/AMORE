@@ -11,9 +11,11 @@ A similar problem means that the boat's forward speed cannot be adjusted
 *en route.*
 
 Use the tool to address questions like the following.
-* What heading and speed should be chosen?
+
+* What heading and speed should be chosen, for the default values for other settings?
 * Can heading and speed be chosen independently of each other?
 * Is cross-shore variation of current an important factor?
+* Is it always possible to reach the destination?
 
 
 ```{r echo=FALSE}
@@ -32,7 +34,7 @@ ui <- fluidPage(titlePanel(title="", windowTitle="River Transit"),
                 label="Current [m/s]")),
         column(3, selectInput("type", choices=c("constant", "parabolic"),
             label="Current Type")),
-        column(2, sliderInput("width", value=1000, min=500, max=10e3, step=10,
+        column(2, sliderInput("width", value=200, min=200, max=1000, step=10,
                 label="Width [m]")),
         column(2, sliderInput("ub", value=2, min=0.1, max=5.0, step=0.01,
                 label="Speed [m/s]")),
@@ -76,10 +78,13 @@ server <- function(input, output, session)
         times <- seq(0, tmax, length.out=2000)
         # Solve the DE
         sol <- lsoda(IC, times, func, parms=parms)
+        # We don't actually model the north coast, so chop off data when we get a
+        # little past that y value.  It would be easy to interpolate to find the
+        # x and t values at this y, if desired.
+        inwater <- sol[,3] < 1.02 * input$width
+        sol <- sol[inwater,]
         # Plot
         par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
-        inwater <- sol[,3] <= 1.04*input$width
-        sol <- sol[inwater,]
         plot(sol[, 2], sol[, 3], asp=1, type="l", lwd=2, ylim=c(-0.04*input$width, 1.04*input$width),
             yaxs="i", xlab="x [m]", ylab="y [m]", pch=20)
         grid()
@@ -88,6 +93,8 @@ server <- function(input, output, session)
         polygon(c(usr[1], usr[1], usr[2], usr[2]), c(usr[3], 0, 0, usr[3]), col="tan")
         points(0, 0, col=2, pch=20, cex=2.5)
         points(0, input$width, col=2, pch=20, cex=2.5)
+        # redraw
+        lines(sol[, 2], sol[, 3], lwd=2)
         end <- which(is.finite(sol[,3]) & sol[,3] >= input$width)[1]
         mtext(sprintf("%.1f minutes", sol[end,1]/60))
     }, height="auto", pointsize=15)
