@@ -20,8 +20,8 @@ is a friction coefficient, equal to the product of air density, a dimensionless
 drag coefficient, and the projected area of the object.
 
 The simulation solves these equations numerically, given parameters as set by
-the sliders. (The default values of the sliders might be suitable for a
-recreational game of toss.)
+the sliders. (The slider default values might represent a recreational game of
+baseball toss.)
 
 Try adjusting the sliders to address questions like the following.  You may find
 it helpful to start with the case of zero friction.  Then, adjust the friction
