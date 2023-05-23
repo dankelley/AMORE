@@ -130,7 +130,7 @@ plot(m)
 
 ## Confidence Intervals
 
-We cam compute the 95% t CI of the slope of this linear regression.
+We can compute the 95% t CI of the slope of this linear regression.
 
 ```{r}
 confint(m, level=0.95)
@@ -139,10 +139,7 @@ confint(m, level=0.95)
 ## Extracting Coefficients
 
 ```{r}
-coef(m)[1] #Intercept
-coef(m)[2] #Slope
-
-coef(m) #Intercept and slope
+coef(m)
 ```
 
 ## Adding our linear model to the plot
@@ -218,13 +215,10 @@ We can perform the majority of statistical operations on nls() models that we ca
 
 ##Extracting Coefficients
 ```{r}
-coef(mnonlinear)[1] #Intercept
-coef(mnonlinear)[2] #Slope
-
-coef(mnonlinear) #Intercept and slope
+coef(mnonlinear)
 ```
 
-We cam compute the 95% t CI of the slope of this nonlinear regression.
+We can compute the 95% t CI of the slope of this nonlinear regression.
 ```{r}
 confint(mnonlinear, level=0.95)
 ```
