@@ -1,0 +1,48 @@
+---
+title: Notes from AMORE meeting 4
+date: 2023-05-24
+output: pdf_document
+author: Dan Kelley (he, him)
+---
+
+**Summary**
+
+The main topic was "shiny", a system that lets you create a GUI (graphical user
+interface) for R.
+
+The main topics were as follows.
+
+1. History of GUIs, difficulty in programming them, and how shiny solved the problem by using the javascript language to link R to webpages.
+2. Discussion of four shiny apps, each written as an interactive notebook:
+   * `ctd_plot` shows how to plot CTD files chosen with a pulldown menu
+   * `PIcurve` revisits the nonlinear regression topic from a previous session,
+     although using a different model for the P-I curve. In the app, random
+     numbers are created, and then regression is performed.  A key point is the
+     use of `try()` to recover from errors in function calls.  This is handy for
+     tasks that might fail (e.g. with too few points to constrain a regression).
+     Simulators like this can be useful in planning experiments, e.g. to find
+     out how many data samples might be required to attain a desired confidence
+     interval in a calibration experiment.
+   * `river_crossing` introduces the use of numerical differential-equation
+     solvers, in a toy model of crossing a river in a boat.  Applications to
+     AUVs, gliders, etc. were discussed in the group.
+   * `ballistic_trajectory` is another app that solves differential equations.
+     It does not offer much (in terms of R coding) that is not provided by
+     `river_crossing`, but it might be of interest anyway.
+3. Discussion of an additional app that is not (yet) in open-source, and so it
+   won't be mentioned here (until a student can finish a PhD that employs the
+   code).
+
+**Plans**
+
+In the next (5th) meeting, DEK plans to discuss the AI (artificial intelligence)
+in an even sketchier way than was the case for the present meeting.
+
+**Resources**
+
+* After the meeting, DEK made a 35-minute video that went over the 4 shiny apps.
+  Admittedly, the video is longer than it ought to be.  That's partly because
+  DEK got confused as to what windows were being shared in the zoom session he
+  had set up to do the recording.  (Zoom recordings tend to make smaller files
+  than other recording methods.)  The video is at https:
+  //www.dropbox.com/s/6mzxae4jn68vy47/amore_meeting_4_followup.mp4?dl=0

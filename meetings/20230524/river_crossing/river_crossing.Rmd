@@ -1,0 +1,150 @@
+---
+title: River-crossing simulation
+author: Dan Kelley (member of AMORE group)
+date: 2023-05-28
+runtime: shiny
+---
+
+A captain wants to cross a river to reach a certain point on the other shore.
+There is something wrong with power train, and the boat cannot adjust its speed
+through the water. If the "Aim" item is unchecked, the captain decides on a
+heading, and maintains that until the crossing is complete.  But if "Aim" is
+checked, then the captain continuously steers towards the target point.
+
+Below are some questions you might like to consider, for "Aim" unchecked.
+
+* What heading and speed should be chosen, for the default values for other
+  settings?
+* If the boat is to get to the target destination, for unchecked "Aim", can
+  heading and speed be chosen independently of each other?
+* What is the explanation for the difference in trajectories for the cases of
+  constant and parabolic river current?
+
+Now, check "Aim" and try varying the currents, to discover patterns.  Do you
+think the "Aim" method is faster or slower?  Why?
+
+Pondering these things in a wider context might be a useful exercise.
+
+```{r echo=FALSE}
+debug <- FALSE # set TRUE to debug how 'aim' circles at the end
+library(shiny)
+library(deSolve) # for lsoda() or rk4() ... the former is a problem with aim
+
+heading2theta <- function(heading)
+    (90 - heading) * pi / 180
+
+# User Interface
+ui <- fluidPage(titlePanel(title="", windowTitle="River Transit"),
+    tags$script('$(document).on("keypress", function (e) { Shiny.onInputChange("keypress", e.which); Shiny.onInputChange("keypressTrigger", Math.random()); });'),
+    style="text-indent:1em; background:#e6f3ff",
+    fluidRow(
+        column(2, sliderInput("ur", value=1.0, min=0.0, max=2.0, step=0.01,
+                label="Current [m/s]")),
+        column(2, selectInput("type", choices=c("constant", "parabola"),
+            label="Current Type")),
+        column(2, sliderInput("width", value=200, min=200, max=1000, step=10,
+                label="Width [m]")),
+        column(2, sliderInput("ub", value=2, min=0.1, max=5.0, step=0.01,
+                label="Speed [m/s]")),
+        conditionalPanel("input.aim != 1",
+            column(2, sliderInput("heading", value=0.0, min=-89.0, max=89.0, step=0.25,
+                    label="Heading [deg]"))),
+        column(2, checkboxInput("aim", label="Aim?", FALSE))),
+    fluidRow(plotOutput("plot", height="300")))
+
+# Server Functions
+server <- function(input, output, session)
+{
+    output$plot <- renderPlot({
+        # convert from nautical "heading" (CW from North) to mathematical "theta" (CCW from east)
+        # River speed (parabolic in y)
+        ur <- function(y, width, max) {
+            if (input$type == "parabola") {
+                yy <- y / width
+                ifelse(yy < 1, 4 * max * yy * (1 - yy), 0)
+            } else {
+                max
+            }
+        }
+        # Dynamical function
+        func <- function(t, y, parms)
+        {
+            X <- y[1] # extract eastward coordinate (with origin at southern red dot)
+            Y <- y[2] # extract northward coordinate (with origin at southern red dot)
+            if (Y < input$width) {
+                theta <- if (parms$aim) pi/2+atan2(X, input$width-Y) else parms$theta
+                u <- ur(Y, parms$width, parms$ur) + parms$ub * cos(theta)
+                v <- parms$ub * sin(theta)
+            } else {
+                u <- 0
+                v <- 0
+            }
+            list(c(u=u, v=v)) # return derivatives dX/dt and dY/dt
+        }
+        # set up parameters
+        parms <- list(
+            width=input$width,
+            ur=input$ur,
+            ub=input$ub,
+            aim=input$aim,
+            theta=heading2theta(input$heading))
+        # Set up initial conditions (i.e. initial location)
+        IC <- c(0, 0)
+        # Establish reporting times.
+        tmax <- 80 * input$width/input$ub # guess on time required
+        times <- seq(0, tmax, length.out=1000)
+        # Solve the DE
+        sol <- if (input$aim) rk4(IC, times, func, parms=parms)
+            else lsoda(IC, times, func, parms=parms, maxsteps=10000)
+        t <- sol[, 1]
+        x <- sol[, 2]
+        y <- sol[, 3]
+        if (debug)
+            save(sol, t, x, y, file="danny.rda")
+        # Interpolate to the coast (if we crossed it)
+        i <- which(y > input$width)[1]
+        if (debug)
+            cat(paste("i=", i, "\n"), file=stderr())
+        if (length(i) && is.finite(i) && i > 1L) {
+            frac <- (input$width - y[i-1]) / (y[i] - y[i-1])
+            if (debug)
+                cat(sprintf("i=%d frac=%.3f\nx[i]=%.3f y[i]=%.3f t[i]=%.3f\n->\n",
+                        i, frac, x[i], y[i], t[i]), file=stderr())
+            y[i] <- y[i-1] + frac * (y[i] - y[i-1])
+            x[i] <- x[i-1] + frac * (x[i] - x[i-1])
+            t[i] <- t[i-1] + frac * (t[i] - t[i-1])
+            if (debug)
+                cat(sprintf("x[i]=%.3f y[i]=%.3f t[i]=%.3f\n",
+                        x[i], y[i], t[i]), file=stderr())
+            x <- head(x, i)
+            y <- head(y, i)
+            t <- head(t, i)
+        }
+        # Plot
+        par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+        plot(x, y, asp=1, type="l", lwd=2,
+            ylim=c(-0.04*input$width, 1.04*input$width),
+            yaxs="i", xlab="x [m]", ylab="y [m]", pch=20)
+        grid()
+        usr <- par("usr")
+        polygon(c(usr[1], usr[1], usr[2], usr[2]), c(parms$width, usr[4], usr[4], parms$width), col="tan")
+        polygon(c(usr[1], usr[1], usr[2], usr[2]), c(usr[3], 0, 0, usr[3]), col="tan")
+        points(0, 0, col=2, pch=20, cex=2.5)
+        points(0, input$width, col=2, pch=20, cex=2.5)
+        # redraw
+        lines(x, y, lwd=2)
+        mtext(paste0("Transit in ", round(tail(t,1), 1), " s"))
+    }, height="auto", pointsize=15)
+
+    # Accept keypress '?'
+    observeEvent(input$keypressTrigger,
+        {
+            if (intToUtf8(input$keypress) == "?") {
+                showNotification(HTML("<b>Many rivers to cross</b><br><b>But I can't seem to find my way over</b><br>-- <i>Jimmy Cliff 1969</i>"),
+                type="message", duration=NULL)
+            }
+        })
+}
+
+shinyApp(ui=ui, server=server)
+```
