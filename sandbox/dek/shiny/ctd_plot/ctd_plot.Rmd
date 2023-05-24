@@ -7,23 +7,18 @@ runtime: shiny
 ---
 
 ```{r echo=FALSE}
-
 # 1. setup
 library(oce)
 dir <- "~/data/arctic/beaufort/2012"
 files <- list.files(dir, ".cnv")
-
 # 2. define GUI
 selectInput(inputId="file",
-    label=sprintf("Select CNV file within %s", dir),
+    label=paste("Select CNV in ", dir),
     choices=files)
-
-# 3. react to GUI
+# 3. plot, if input$file has changed
 renderPlot(
     {
         d <- read.oce(paste0(dir, "/", input$file))
         plot(d)
-    },
-    height=600, pointsize=18)
-
+    }, height=600, pointsize=18)
 ```
