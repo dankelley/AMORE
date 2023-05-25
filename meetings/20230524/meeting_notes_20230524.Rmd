@@ -12,7 +12,8 @@ interface) for R.
 
 The main topics were as follows.
 
-1. History of GUIs, difficulty in programming them, and how shiny solved the problem by using the javascript language to link R to webpages.
+1. History of GUIs, difficulty in programming them, and how shiny solved the
+   problem by using the javascript language to link R to webpages.
 2. Discussion of four shiny apps, each written as an interactive notebook:
    * `ctd_plot` shows how to plot CTD files chosen with a pulldown menu
    * `PIcurve` revisits the nonlinear regression topic from a previous session,
@@ -35,7 +36,7 @@ The main topics were as follows.
 
 **Plans**
 
-In the next (5th) meeting, DEK plans to discuss the AI (artificial intelligence)
+In the next (5th) meeting, DEK plans to discuss AI (artificial intelligence)
 in an even sketchier way than was the case for the present meeting.
 
 **Resources**
@@ -44,5 +45,5 @@ in an even sketchier way than was the case for the present meeting.
   Admittedly, the video is longer than it ought to be.  That's partly because
   DEK got confused as to what windows were being shared in the zoom session he
   had set up to do the recording.  (Zoom recordings tend to make smaller files
-  than other recording methods.)  The video is at https:
-  //www.dropbox.com/s/6mzxae4jn68vy47/amore_meeting_4_followup.mp4?dl=0
+  than other recording methods.)
+  The video is at https://www.dropbox.com/s/6mzxae4jn68vy47/amore_meeting_4_followup.mp4?dl=0
