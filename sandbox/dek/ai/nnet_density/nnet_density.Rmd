@@ -61,7 +61,7 @@ ui <- fluidPage(titlePanel(title="", windowTitle="Neural Network (seawater densi
 server <- function(input, output, session)
 {
     output$plot <- renderPlot({
-        input$refresh # does this cause replots?
+        input$refresh # cause a replot (with new training data) if 'refresh' is clicked
         # Show a Bedford Basin TS diagram (just to get a scale)
         data(ctd)
         plotTS(ctd, type="l", lwd=2, mar=c(3, 3, 1, 1))
