@@ -69,12 +69,13 @@ server <- function(input, output, session)
         usr <- par("usr")
         SAt <- runif(input$ntrain, min=usr[1], max=usr[2])
         CTt <- runif(input$ntrain, min=usr[3], max=usr[4])
+        # Show training set as red dots
         points(SAt, CTt, pch=20, cex=1.4, col=2)
+        # Fit the neural network to the training set
         sigma0t <- gsw_sigma0(SAt, CTt)
         trainingSet <- list(SA=SAt, CT=CTt, sigma0=sigma0t)
-        # Fit the neural network to the training set
         net <- nnet(sigma0 ~ SA+ CT, data=trainingSet, linout=TRUE, size=input$nnode)
-        # Display results as red-dashed contours
+        # Display results on a grid, as blue-dashed contours
         Ng <- 50
         SAg <- seq(usr[1], usr[2], length.out=Ng)
         CTg <- seq(usr[3], usr[4], length.out=Ng)
