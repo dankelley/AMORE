@@ -30,15 +30,15 @@ functional path, i.e. Keras functions usually modify their input.)
 # Simulation
 
 The app given below illustrate a test of using a neural network to represent the
-equation of state of seawater, $\sigma=\rho(S_A, C_T)-1000$kg/m$^3$.  This is
-not something worth doing in a practical sense, since we already know the
-equation of state, but it makes for a clear illustration of some concepts
-relating to network size and training-set size. Try adjusting the sliders for
-these things, to gain some intuition on how the accuracy of the solution varies
-with network size and training-set size.  The red dots are the training set,
-which is regenerated randomly whenever either slider is altered, or when the
-"New samples" button is clicked.  The "Reset sliders" button returns the sliders
-(but not the random numbers) to the initial state.
+equation of state of seawater, $\sigma_0(S_A, C_T)$.  This is not something
+worth doing in a practical sense, since we already know the equation of state,
+but it makes for a clear illustration of some concepts relating to network size
+and training-set size. Try adjusting the sliders for these things, to gain some
+intuition on how the accuracy of the solution varies with network size and
+training-set size.  The red dots are the training set, which is regenerated
+randomly whenever either slider is altered, or when the "New samples" button is
+clicked.  The "Reset sliders" button returns the sliders (but not the random
+numbers) to the initial state.
 
 
 ```{r echo=FALSE}
