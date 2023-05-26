@@ -48,7 +48,6 @@ library(nnet)
 
 library(shiny)
 ui <- fluidPage(titlePanel(title="", windowTitle="Neural Network (seawater density)"),
-    tags$script('$(document).on("keypress", function (e) { Shiny.onInputChange("keypress", e.which); Shiny.onInputChange("keypressTrigger", Math.random()); });'),
     style="text-indent:1em; background:#e6f3ff",
     sidebarPanel(
         sliderInput("nnode", value=30, min=10, max=100, step=1,
