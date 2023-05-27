@@ -20,25 +20,24 @@ Essentially, `nnet()` is a product of the early years of neural networks, before
 Hinton and colleagues showed how back-propagation enables fast solution of
 complex multilayered networks.
 
-The paper by @rumelhart_learning_1986 was the start of the new age of neural
-networks, and it should be readable by anyone who is comfortable with Calculus
-and has a bit of patience for notation. As for software, the recent book by
-@chollet_deep_2022 introduces R users to the popular "Keras/TensorFlow" system.
-(A caveat: this system derives from a Python system and so it does not follow a
-functional path, i.e. Keras functions usually modify their input.)
+To learn more about back-propagation, see the seminal paper by
+@rumelhart_learning_1986. More insights on the basic ideas, with a specific
+focus on the Keras/TensorFlow approach, are provided in the highly-recommended
+text by @chollet_deep_2022, which is especially insightful, since Keras was
+written by Chollet. Note that the Keras/TensorFlow system was developed in a
+language (Python) that allows functions to alter their arguments, and this
+convention can lead to confusion for R users.
 
 # Simulation
 
-The app given below illustrate a test of using a neural network to represent the
-equation of state of seawater, $\sigma_0(S_A, C_T)$.  This is not something
-worth doing in a practical sense, since we already know the equation of state,
-but it makes for a clear illustration of some concepts relating to network size
-and training-set size. Try adjusting the sliders for these things, to gain some
-intuition on how the accuracy of the solution varies with network size and
-training-set size.  The red dots are the training set, which is regenerated
-randomly whenever either slider is altered, or when the "New samples" button is
-clicked.  The "Reset sliders" button returns the sliders (but not the random
-numbers) to the initial state.
+The following app shows how to use a neural network to represent the equation of
+state (EOS) of seawater, $\sigma_0=\sigma_0(S_A, C_T)$.  The point is not to
+replace the EOS, but rather to provide an example of oceanographic interest. Try
+adjusting the sliders to learn how the accuracy of the solution varies with
+network size and training-set size. The red dots are the training set, which is
+regenerated randomly whenever either slider is altered, or when the "New
+samples" button is clicked.  The "Reset sliders" button returns the sliders (but
+not the random numbers) to the initial state.
 
 
 ```{r echo=FALSE}
