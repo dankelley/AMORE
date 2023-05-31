@@ -14,10 +14,10 @@ The main topics were as follows.
 
 1. AI in the news (note the name "Hinton").
 2. Concept of neural networks.
-   * A two-photoneuron animal trying to detect which direction is "up".
-     Notation: bias+weight*signal (y=b+w*x). Idea: finding minima by
-     Nelder-Meade ("simplex") method is much cheaper than a grid search but
-     knowing derivatives will help a lot.
+   * A two-photoneuron animal trying to detect which direction is "up". Notation:
+     bias+weight*signal (y=b+w*x). Idea: finding minima by Nelder-Meade
+     ("simplex") method is much cheaper than a grid search but knowing
+     derivatives will help a lot.
 
    * Extension to a 4-pixel "eye".  Further extension to images (e.g. Video
      Plankton Recorder images).
@@ -38,12 +38,19 @@ you'll notice when things get posted.
 
 **Resources**
 
-* This directory holds the code for the zipcode example, plus a PDF that DEK
-  created from his Zotero database of items he tagged as "AI".  The Rumelhart et
-  al. (1986) is an excellent place to start, to try to understand the
-  mathematics behind the algorithms.  (These many years, and many PhDs later, things
-  have certainly advanced, and the Chollet et. al. 2022 book is very highly recommended
-  for anyone trying to work with AI systems.  Finally, the blog posting Rubiera
-  provides a fascinating view of the protein-shape application, as well as
-  giving a clear impression of how exciting AI is, in just this one of very many
-  fields. Unlike many things in research, the excitement is not faked just to get funding.
+This directory holds the code for the zipcode example, plus a PDF that DEK
+created from his Zotero database of items he tagged as "AI".  The Rumelhart et
+al. (1986) is an excellent place to start, to try to understand the mathematics
+behind the algorithms.  (These many years, and many PhDs later, things have
+certainly advanced, and the Chollet et. al. 2022 book is very highly recommended
+for anyone trying to work with AI systems.  Finally, the blog posting Rubiera
+provides a fascinating view of the protein-shape application, as well as giving
+a clear impression of how exciting AI is, in just this one of very many fields.
+Unlike many things in research, the excitement is not faked just to get funding.
+
+**Followup**
+
+As a followup to the meeting, I added code here (in file
+`mnist/03_examine_ones.R`) that plots all the "1" images from the training set.
+I also made a short video talking about this (see https:
+//www.dropbox.com/s/qfl136swzojucb2/amore_meeting_5_followup.mp4?dl=0).
