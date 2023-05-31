@@ -53,4 +53,5 @@ Unlike many things in research, the excitement is not faked just to get funding.
 As a followup to the meeting, I added code here (in file
 `mnist/03_examine_ones.R`) that plots all the "1" images from the training set.
 I also made a short video talking about this
+
 https://www.dropbox.com/s/qfl136swzojucb2/amore_meeting_5_followup.mp4?dl=0
