@@ -1,0 +1,47 @@
+---
+title: "Notes from AMORE meeting 6 (map projections)"
+date: 2023-06-07
+output: pdf_document
+author: Dan Kelley (he, him)
+bibliography: iridium.bib
+---
+
+## Summary
+
+Clark Richards led the discussion of map projections, touching
+on points such as those listed below.
+
+* The use of a longitude-latitude coordinate system to represent positions on
+  the earth.
+* Problems in using the ordinary `plot()` function to show e.g. the
+  longitude-latitude pairs in `data("coastlineWorld", package="oce")`,
+  and the utility of the `asp` argument in making more realistic
+  representations (at least locally) with such plots.
+* Using `points()` to add the `data("argo", package="oce")` dataset to a diagram
+  created with `plot()`.  Similarly, `lines()`, `contour()` and similar
+  functions can be used to add to the `plot()` results.
+* The use of the `projection` argument of `plot()` to set a good `asp` value
+  automatically.
+* Use of `mapPlot()` and its add-on
+  function relatives, `mapPoints()`, `mapLines()`, etc.
+
+Examples were used throughout, and lots of practical advice was offered, in
+addition to theory.
+
+## Plans
+
+The next meeting topic will be how to write code to handle with new data
+formats. Dan Kelley will lead this, likely with help from Clark Richards and
+Cameron Richardson.  AMORE members have provided 3 datasets that might be
+discussed: position data for a drifter, CTD-like data from a local application,
+and an Iridium record.  The first two are textual, and one or both may be
+discussed. The third is binary, and although Dan has located a document that
+might indicate how to read such files (@iridium_satellite_llc_iridium_2007), his
+results so far have been self-contradictory ... unless he can make progress, he
+is unlikely to waste AMORE time by talking about this.
+
+## Resources
+
+Clark's R-history file is found in this directory.
+
+# References

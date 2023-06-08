@@ -1,0 +1,63 @@
+---
+title: Notes from AMORE meeting 5
+date: 2023-05-31
+output: pdf_document
+author: Dan Kelley (he, him)
+---
+
+**Summary**
+
+The main topic was AI (artificial intelligence).
+interface) for R.
+
+The main topics were as follows.
+
+1. AI in the news (note the name "Hinton").
+2. Concept of neural networks.
+   * A two-photoneuron animal trying to detect which direction is "up". Notation:
+     $bias+weight*signal$ ($y=b+w*x$). Idea: finding minima by Nelder-Meade
+     ("simplex") method is much faster than a grid search, but knowing
+     derivatives enables even faster results.
+
+   * Extension to a 4-pixel "eye".
+
+   * Extension to images (e.g. Video Plankton Recorder images).
+
+   * The prime importance of Rumelhart et al. (1986).  And note the second
+     author, very much in the news these past weeks.
+
+3. The zipcode example from Chollet et al. (2022).
+
+
+**Plans**
+
+From now on, AMORE meetings will be on an as-requested basis.  If there is a
+topic you would like to see addressed in a future session, please visit the
+website (https::www.github.com/dankelley/AMORE) and post an "issue".  Also,
+please be sure to "watch" this repository (see the top-right of the webpage) so
+you'll notice when things get posted.
+
+**Resources**
+
+This directory holds the code for the zipcode example, plus a PDF that DEK
+created from his Zotero database of items he tagged as "AI".  Here are some highlights.
+
+* The seminal Rumelhart et al. (1986) paper is an excellent place to start, if
+  you want to explore the mathematics behind the algorithms.  
+
+* There is a lot to read but if you want to read as you also learn the
+  practicalities, the Chollet et. al. 2022 book is wonderful resource.  (The
+  first author created Keras, a key software system for AI work.)
+
+* The blog posting Rubiera provides a fascinating view of the protein-shape
+  application, as well as painting a picture of how exciting AI is, in just this
+  one of very many fields. Unlike many things in research, the excitement is not
+  faked just to get funding.
+
+**Followup**
+
+As a followup to the meeting, I added code (in file `mnist/03_examine_ones.R`)
+that plots all the "1" images from the training set. I also made a short video
+about this, and placed it here:
+
+https://www.dropbox.com/s/qfl136swzojucb2/amore_meeting_5_followup.mp4?dl=0
