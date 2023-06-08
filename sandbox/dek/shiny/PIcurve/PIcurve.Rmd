@@ -1,0 +1,94 @@
+---
+title: Photosynthesis Irradiance Curve Fitting
+date: 2023-05-24
+author: Dan Kelley (member of the AMORE group)
+output: html_document
+bibliography: PI.bib
+runtime: shiny
+---
+
+# Background
+
+@jassby_mathematical_1976 recommend using the empirical formula.
+
+\begin{equation}
+P = P_{m} \tanh(\alpha I / P_{m})
+\end{equation}
+
+\noindent to model the dependence of photosynthetic rate, $P$, on solar
+irradiance, $I$.  Note that this formula is only for what is called the "non
+quenched" case, in which $P$ asymptotes to a constant with increasing $I$.
+
+An example of such a curve is Figure 4b of @platt_photoinhibition_1980, as
+shown below.
+
+![](platt1980fig4b.png){width="80%"}
+
+# Simulator
+
+```{r echo=FALSE}
+
+# Jassby and Platt's (1976) recommended (empirical) formula
+PI <- function(I, Pm, alpha)
+{
+    Pm * tanh(alpha * I / Pm)
+}
+
+fluidRow(
+    column(3, sliderInput("Pm",    "Pm:",        1, min=0.5,  max=1.5, step=0.1)),
+    column(3, sliderInput("alpha", "alpha:",     1, min=1,    max=5,   step=0.1)),
+    column(3, sliderInput("n",     "# points:", 20, min=5,    max=50,  step=1)),
+    column(3, sliderInput("sd",    "Noise:",   0.1, min=0.01, max=0.5, step=0.01)))
+
+renderPlot(
+    {
+        # Fake data
+        set.seed(2023)
+        I <- seq(0, 2, length.out=input$n)
+        Pm <- input$Pm
+        alpha <- input$alpha
+        P <- PI(I, Pm, alpha) + rnorm(length(I), sd=input$sd)
+
+        # Fit model
+        # EXERCISE: use try() on the nls() call (as done below).
+        m <- try({nls(P ~ Pm*tanh(alpha * I / Pm), start=list(Pm=1, alpha=1))}, silent=TRUE)
+
+        # Find coefficients and (maybe) confidence intervals.
+        if (!inherits(m, "try-error")) {
+            CI <- list()
+            CItrial <- try({confint(m)}, silent=TRUE)
+            if (!inherits(CItrial, "try-error")) {
+                CI$Pm <- diff(CItrial[1,])/2
+                CI$alpha <- diff(CItrial[2,])/2
+            }
+        }
+
+        # Display results
+        par(mar=c(3, 10, 3, 10), mgp=c(2, 0.7, 0)) # tighten margins
+        plot(I, P, pch=20, xlim=c(0, 2), ylim=c(0, 2), asp=1,
+            xlab="Irradiance (arbitrary units)",
+            ylab="Photosynthesis (arbitrary units)")
+        grid()
+        if (!inherits(m, "try-error")) {
+            II <- seq(min(I), max(I), length.out=200)
+            lines(II, predict(m, data.frame(I=II)), lwd=2)
+            if (length(CI) == 2) {
+                legend("bottomright", pch=c(20,NA), lwd=c(NA, 2), cex=0.9,
+                    legend=c("Simulated Data",
+                        sprintf("Pm=%.2f\u00B1%.2f, \u03B1=%.2f\u00B1%.2f",
+                            coef(m)[1], CI$Pm, coef(m)[2], CI$alpha)))
+            } else {
+                legend("bottomright", pch=c(20,NA), lwd=c(NA, 2), cex=0.9,
+                    legend=c("Simulated Data",
+                        sprintf("Pm=%.2f, \u03B1=%.2f",
+                            coef(m)[1], coef(m)[2])))
+                mtext("Cannot compute confidence intervals")
+            }
+        } else {
+            mtext("Cannot fit the model")
+        }
+    }, height=500, pointsize=18)
+```
+
+# References
+

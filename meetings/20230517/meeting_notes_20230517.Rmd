@@ -1,0 +1,46 @@
+---
+title: Notes from AMORE meeting 3
+date: 2023-05-17
+output: pdf_document
+author: Dan Kelley (he, him)
+---
+
+**Summary**
+
+The main topic was regression, or curve-fitting, and the subtopics were as follows.
+
+1. Regression as an optimization procedure: least-squares vs other cost
+   functions, restriction of typically taught least-squares linear regression,
+   difficulty of multiple minima, ill-constrained estimation, etc.
+2. Linear regression of least-squares type: `lm()` and associated functions
+   `summary()`, `plot()`, `coef()`, `predict()` and `confint()`.
+3. Nonlinear regression with `nls()`: difficulties and how to avoid them,
+   with an example using the function $ax\exp(-x/b)$, where $a$ and $b$
+   are parameters to be fitted.
+
+Cameron took notes in R markdown during the meeting(!!); please Resources below.
+
+**Plans**
+
+In the next (4th) meeting, DEK plans to discuss the "shiny" system for R-enabled
+graphical user interfaces.  The 5th meeting will include an introduction to AI
+powered by neural networks.
+
+A survey of those in the room (and emails sent separately) indicates that there
+is interest in continuing AMORE beyond the initially-planned 5 weeks.  The format
+will switch from a lecture style to a group-discussion style, where members
+can exchange ideas and help each other.  If people have requests that they think
+might need some work beforehand, it would be helpful if they could email
+descriptions (and data files) to Dan (at kelley@dal.ca) and Clark (at
+clark.richards@gmail.com).
+
+**Resources**
+
+* During the meeting, Clark emailed Dan a comic that is relevant to the "p
+  hacking" problem in science.  It's at https://xkcd.com/882/
+* Cameron's notes made during the meeting are in the file named
+  `AMORE-3-Regression.Rmd`, in the present directory.
+* After the meeting, DEK made a little video, illustrating nonlinear fitting for
+  a CO2 record.  It is available at https:
+  //www.dropbox.com/s/w3x439dg4i9kkpe/amore_meeting_3_followup.mp4?dl=0 online.
+

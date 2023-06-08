@@ -1,0 +1,126 @@
+---
+title: Ballistic trajectory
+author: Dan Kelley (member of AMORE group)
+date: 2023-05-28
+runtime: shiny
+---
+
+The trajectory of an object thrown through the air is controlled by Newton's
+momentum equations,
+\begin{equation}
+\begin{split}
+m\frac{du}{dt} &= -\lambda u U\\
+m\frac{dw}{dt} &= -mg -\lambda w U
+\end{split}
+\end{equation}
+where $m$ is the object's mass, $u$ and $w$ [m/s] are its velocity components in
+the horizontal and vertical directions, $g=9.8$m/s$^2$ is the acceleration due
+to gravity, $U=(u^2+w^2)^{1/2}$ is the speed of the object, and $\lambda$ [kg/m]
+is a friction coefficient, equal to the product of air density, a dimensionless
+drag coefficient, and the projected area of the object.
+
+The simulation solves these equations numerically, given parameters as set by
+the sliders. (The slider default values might represent a recreational game of
+baseball toss.)
+
+Try adjusting the sliders to address questions like the following.  You may find
+it helpful to start with the case of zero friction.  Then, adjust the friction
+coefficient to consider other situations of interest, e.g. table tennis or
+badminton.  It may be necessary to adjust the code (i.e. the limits on the
+sliders) to address some situations.
+
+1. Adjusting just the angle slider, find the direction that will make the object
+   land exactly 10 m away.
+2. Refresh the settings, and then adjust the angle slider to find the maximum
+   distance that can be achieved with a 10m/s throw.
+3. Adjust to the speed and angle sliders to find the maximal distance of an
+   object thrown at 46 m/s, which might be achieved by an elite baseball
+   pitcher.
+4. Is there an angle that is always best for getting long distance throws?
+
+
+```{r echo=FALSE}
+library(shiny)
+library(deSolve) # for lsoda()
+
+# User Interface
+#
+# The default lambda, 0.0015 kg/m, is from the product of air density $\rho_a$=1.2 kg/m$^3$,
+# drag coefficient $C_D=0.3$, and area $\pi R^2$ where $R=0.037$m is the ball
+# radius, but the slider also permits much higher values, as might be suitable for
+# a badminton shuttlecock.
+ui <- fluidPage(titlePanel(title="", windowTitle="River Transit"),
+    tags$script('$(document).on("keypress", function (e) { Shiny.onInputChange("keypress", e.which); Shiny.onInputChange("keypressTrigger", Math.random()); });'),
+    style="text-indent:1em; background:#e6f3ff",
+    fluidRow(
+        column(2, sliderInput("m", value=0.150, min=0.01, max=0.25, step=0.01,
+                label="Mass [kg]")),
+        column(3, sliderInput("U", value=15.0, min=2.0, max=46.0, step=0.05,
+                label="Speed [m/s]")),
+        column(3, sliderInput("angle", value=20.0, min=0, max=90.0, step=0.1,
+                label="Angle [deg]")),
+        column(2, sliderInput("lambda", value=0.0015, min=0, max=0.01, step=0.0005,
+                label="Friction [kg/m]")),
+        column(2, checkboxInput("naturalScale", "Natural Scaling", TRUE))),
+    fluidRow(plotOutput("plot", height="300")))
+
+# Server Functions
+server <- function(input, output, session)
+{
+    output$plot <- renderPlot({
+        # Dynamical function for y=c(x, z, u, w)
+        dynamics <- function(t, y, parms)
+        {
+            x <- y[1]
+            z <- y[2]
+            u <- y[3]
+            w <- y[4]
+            U <- sqrt(u^2 + w^2)
+            list(c(dxdt=u,
+                    dzdt=w,
+                    dudt=-parms$lambda*u*U/parms$m,
+                    dwdt=-parms$g - parms$lambda*w*U/parms$m))
+        }
+        # set up parameters
+        parameters <- list(g=9.8, m=input$m, lambda=input$lambda)
+        # Set up initial conditions (i.e. initial location)
+        initialConditions <- c(0, 0, input$U*cos(input$angle*pi/180), input$U*sin(input$angle*pi/180))
+        # Establish reporting times.
+        reportTimes <- seq(0, 100, 0.01)
+        # Solve the differential equations
+        sol <- lsoda(y=initialConditions, times=reportTimes, func=dynamics, parms=parameters)
+        t <- sol[, 1]
+        x <- sol[, 2]
+        z <- sol[, 3]
+        # Interpolate to the ground strike at y=0, if the object fell below that level
+        i <- which(z < 0)[1]
+        landed <- length(i) == 1 && is.finite(i) && i > 1L
+        if (landed) {
+            slope <- (z[i]-z[i-1]) / (x[i]-x[i-1])
+            xstar <- x[i-1] - z[i-1] / slope
+            dzdt <- (z[i]-z[i-1]) / (t[i]-t[i-1])
+            tstar <- t[i-1] - z[i-1] / dzdt
+            x[i] <- xstar
+            z[i] <- 0
+            x <- x[seq(1, i)]
+            z <- z[seq(1, i)]
+            t <- t[seq(1, i)]
+        }
+        # Plot
+        par(mar=c(3, 3, 1, 1), mgp=c(2, 0.7, 0))
+        plot(x, z, type="l", lwd=4, col=4,
+            asp=if (input$naturalScale) 1 else NULL,
+            ylim=c(0, 1.04*max(z)), xaxs="i", yaxs="i",
+            xlab="Horizontal coordinate, x [m]", ylab="Vertical coordinate, z [m]")
+        if (input$naturalScale) {
+            usr <- par("usr")
+            rect(usr[1], usr[3], usr[2], 0, col="tan")
+        }
+        grid()
+        if (landed)
+            mtext(paste0("Travelled ", round(xstar, 3), " m in ", round(tstar, 2), " s"))
+    }, height="auto", pointsize=15)
+}
+
+shinyApp(ui=ui, server=server)
+```

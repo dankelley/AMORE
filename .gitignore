@@ -4,7 +4,8 @@
 *.csv
 *.out
 .DS_Store
-*~
 
 .Rproj.user
 .Rhistory
+.Rapp.history
+
