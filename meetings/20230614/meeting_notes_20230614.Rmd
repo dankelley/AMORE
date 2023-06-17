@@ -3,7 +3,6 @@ title: "Notes from AMORE meeting 7 (reading unusual data)"
 date: 2023-06-14
 output: pdf_document
 author: Dan Kelley (he, him)
-bibliography: iridium.bib
 ---
 
 ## Summary
