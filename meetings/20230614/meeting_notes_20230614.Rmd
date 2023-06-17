@@ -1,0 +1,28 @@
+---
+title: "Notes from AMORE meeting 7 (reading unusual data)"
+date: 2023-06-14
+output: pdf_document
+author: Dan Kelley (he, him)
+bibliography: iridium.bib
+---
+
+## Summary
+
+Dan Kelley led a discussion of dealing with unfamiliar data of both textual and
+binary types. The first of these used a "SPOT" drifter dataset as an example,
+yielding code `spot1.R` in this directory. Dan made a video later (with link
+given below), producing a more extensive code called `spot2.R` in this
+directory.
+
+## Plans
+
+No decision was made on the topic for the next meeting, if one is held.  Several
+topics were put in the github site as issues.  Some of the AMORE members who
+were not present at the meeting have a need to understand how to deal with times
+in R, and so that will most likely be the next topic, if enough AMORE members
+arrive at the usual time and place.
+
+## Resources
+
+Dan's video of reading SPOT data is at
+https://www.dropbox.com/s/6iunozfopwgakk3/amore_meeting_7_followup.mp4?dl=0
