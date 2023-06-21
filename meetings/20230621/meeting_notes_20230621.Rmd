@@ -1,0 +1,29 @@
+---
+title: "Notes from AMORE meeting 8 (reading netcdf, plotting maps and sections, data wrangling)"
+date: 2023-06-21
+output: pdf_document
+author: Dan Kelley (he, him)
+---
+
+## Summary
+
+Cameron Richardson led a discussion that touched upon reading netcdf files and
+plotting the results as maps and as depth-time sections, e.g. of O$_2$
+concentration^[Cameron has found an intriguing pattern that he, I, and Clark
+will be pondering in the coming weeks, first using a variety of exploratory tools and
+then using dynamical computations.].  Throughout, Cameron provided helpful hints
+on exploring data files to find variables of interest, on how to skip over
+missing values, and how to isolate features of particular interest.  His code
+will likely appear on this site soon.
+
+After that, a variety of topics was touched upon, based on questions posed by
+AMORE members.  This included hints on writing R-markdown files, dealing with
+times in R, etc.
+
+## Plans
+
+Members of the group expressed an interest in meeting again next week.  As
+before, there may be benefit in posting issues to the "issue" part of the
+website (www.github.com/dankelley/AMORE/issues), as a way to make plans on any
+topics that might require a presenter to do a bit of preparatory homework.
+
