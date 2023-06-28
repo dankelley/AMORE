@@ -28,8 +28,6 @@ means that members of the group are "on their own", though.  If the meetings
 have been successful, participants will feel free to reach out to others in the
 group if they need advice.
 
-## Plots from the code
-
 ![Output from `co2-year-average.R`](co2-year-average.png)
 
 ![Output from `co2-average-months.R`](co2-average-months.png)
