@@ -10,12 +10,16 @@ author: Dan Kelley (he, him)
 
 Dan talked about the use of base-R functions `cut()`, `split()` and `lapply()`,
 with a general introduction being followed by two examples relating to the
-timeseries of atmospheric CO$_2$ concentration, i.e. the "Keeling Curve".
+timeseries of atmospheric CO$_2$ concentration, i.e. the "Keeling Curve"
+(see the engaging essay by @monroe_history_2013 for more on the history of this
+dataset). This led to code included as `co2-year-average.R` in this directory.
 
-Code for two examples is include in this directory.  But, please also take a few
-minutes to read the essay by @monroe_history_2013 about the history of this
-dataset.  That story has implications for science, of course, but also for how
-research is funded.
+More briefly, he pointed at code (file `co2-average-months.R` in this directory)
+that takes more detailed CO2 data and breaks it down into years, and then into
+months.
+
+Dan also mentioned a stacking-plot example, showing the result but not the code.
+That is included as the file `co2-stack-years.R` in the present directory.
 
 ## Plans
 
@@ -23,5 +27,14 @@ This was the last planned AMORE session for the summer of 2023.  That doesn't
 means that members of the group are "on their own", though.  If the meetings
 have been successful, participants will feel free to reach out to others in the
 group if they need advice.
+
+## Plots from the code
+
+![Output from `co2-year-average.R`](co2-year-average.png)
+
+![Output from `co2-average-months.R`](co2-average-months.png)
+
+![Output from `co2-stack-years.R`](co2-stack-years.png)
+
 
 # References

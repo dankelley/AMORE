@@ -8,6 +8,5 @@ clean:
 	-rm *~ *png *.out *pdf *~
 view:
 	-open *.png
-	-open *.pdf
 force:
 

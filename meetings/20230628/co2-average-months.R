@@ -15,7 +15,7 @@ data$average[data$average < 0] <- NA
 data$time <- ISOdatetime(data$year, data$month, data$day, 0, 0, 0, tz="UTC")
 dataSplit <- split(data, cut(data$time, "year"))
 if (!interactive())
-    pdf("co2-average-months.pdf", pointsize=15)
+    png("co2-average-months.png")
 par(mfrow=c(3, 3), mar=c(2.7, 2.7, 0.5, 0.5), mgp=c(1.5, 0.4, 0))
 for (i in 1:9) {
     d <- dataSplit[[i]]
