@@ -1,0 +1,27 @@
+---
+title: "Notes from AMORE meeting 8 (reading netcdf, plotting maps and sections, data wrangling)"
+date: 2023-06-28
+output: pdf_document
+bibliography: amore.bib
+author: Dan Kelley (he, him)
+---
+
+## Summary
+
+Dan talked about the use of base-R functions `cut()`, `split()` and `lapply()`,
+with a general introduction being followed by two examples relating to the
+timeseries of atmospheric CO$_2$ concentration, i.e. the "Keeling Curve".
+
+Code for two examples is include in this directory.  But, please also take a few
+minutes to read the essay by @monroe_history_2013 about the history of this
+dataset.  That story has implications for science, of course, but also for how
+research is funded.
+
+## Plans
+
+This was the last planned AMORE session for the summer of 2023.  That doesn't
+means that members of the group are "on their own", though.  If the meetings
+have been successful, participants will feel free to reach out to others in the
+group if they need advice.
+
+# References

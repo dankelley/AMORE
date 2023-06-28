@@ -1,0 +1,14 @@
+---
+title: FILL IN (AMORE meeting 
+author: Dan Kelley
+date: FILL IN
+bibliography: keeling.bib
+---
+
+See @monroe_history_2013 for a good introduction to the "Keeling Curve".
+Although you may be familiar with the dataset, I think you will enjoy learning
+more about the somewhat tangled history of its development (and funding).
+
+# References
+
+
