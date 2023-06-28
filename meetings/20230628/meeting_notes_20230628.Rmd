@@ -28,11 +28,19 @@ means that members of the group are "on their own", though.  If the meetings
 have been successful, participants will feel free to reach out to others in the
 group if they need advice.
 
-![Output from `co2-year-average.R`, a portion of which was discussed in the meeting.](co2-year-average.png)
+![Output from `co2-year-average.R`, the first part of which was discussed in the
+meeting. The R file includes the computation of average time within each month
+segment, and the drawing of the monthly average as a red line on top of the
+monthly data (black).](co2-year-average.png)
 
-![Output from `co2-average-months.R`, a snippet of which was discussed in the meeting.](co2-average-months.png)
+![Output from `co2-average-months.R`, a snippet of which was discussed in the
+meeting. The data were first split by year for subdivision into plot panels,
+showing measurements with dots. Then each year was split into months to compute
+monthly averages, shown here with lines.](co2-average-months.png)
 
-![Output from `co2-stack-years.R`, which was shown in the meeting.](co2-stack-years.png)
+![Output from `co2-stack-years.R`, which was shown in the meeting. Colour shifts
+with each year, on a 9-year cycle. No offset is applied to subsequent years: the offsets
+result from CO$_2$ increasing.](co2-stack-years.png)
 
 
 # References
