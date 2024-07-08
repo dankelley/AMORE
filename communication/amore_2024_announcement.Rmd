@@ -1,7 +1,7 @@
 ---
 title: "AMORE: ad-hoc minicourse on R (etc)"
 author: Dan Kelley (dan.kelley@dal.ca)
-date: Riley Room from 1000h-1100h Mondays and Wednesdays
+date: Riley Room from 1030h-1130h Mondays and Wednesdays
 output:
     pdf_document:
         extra_dependencies: ["microtype", "times", "fullpage"]
@@ -9,7 +9,7 @@ fontsize: 12pt
 ---
 
 With (*ahem*) a few years of experience in R, unix computing, and research
-organization, I have a few operational tricks up my sleeve.  I'd be happy to
+organization, I have a few operational tricks up my sleeve. I'd be happy to
 talk about such things to summer students (and others), if there is sufficient
 interest.
 
