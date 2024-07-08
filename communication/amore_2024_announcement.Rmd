@@ -1,0 +1,35 @@
+---
+title: "AMORE: ad-hoc minicourse on R (etc)"
+author: Dan Kelley (dan.kelley@dal.ca)
+date: Riley Room from 1000h-1100h Mondays and Wednesdays
+output:
+    pdf_document:
+        extra_dependencies: ["microtype", "times", "fullpage"]
+fontsize: 12pt
+---
+
+With (*ahem*) a few years of experience in R, unix computing, and research
+organization, I have a few operational tricks up my sleeve.  I'd be happy to
+talk about such things to summer students (and others), if there is sufficient
+interest.
+
+To this end, I have booked the Riley room for Mondays and Wednesdays from 1030h
+to 1130h from mid July to early August. Please let me know at kelley@dal.ca if
+you're interested in joining.  If more than 2 or 3 people show an interest, we
+can start next week, i.e. Monday July 15.
+
+After a session or two of hints, we can move on to topics suggested by
+participants, e.g. how to read an unfamiliar data format, or how to do a
+particular computation^[Please don't bring up ANOVA or the tidyverse, since
+those things bore me.].  A good pattern might pose questions in Monday
+meetings, giving me a day to think of possible solutions to be shown two days
+later.
+
+This is not a course. Your supervisor cannot tell you to attend. There will be
+no credit. There will be no tests. I might assign some homework, through, if
+you ask me to!
+
+If you're on the fence about attending, you might want to chat with some of the
+folks who participated last summer, to see if it was worthwhile.
+
+Dan.
