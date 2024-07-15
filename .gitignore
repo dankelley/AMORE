@@ -1,3 +1,4 @@
+*.nc
 *.pdf
 *.png
 *.rda
@@ -8,5 +9,4 @@
 .Rproj.user
 .Rhistory
 .Rapp.history
-
 .RData

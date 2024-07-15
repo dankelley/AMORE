@@ -1,0 +1,64 @@
+---
+title: "AMORE: ad-hoc minicourse on R (etc)"
+author: Dan Kelley (dan.kelley@dal.ca)
+date: Riley Room from 1030h-1130h Mondays and Wednesdays
+output:
+    pdf_document:
+        extra_dependencies: ["microtype", "times", "fullpage"]
+fontsize: 12pt
+---
+
+AMORE stands for love, sure, but love of *what*?  If your answer includes
+science, join us at 1030h on Monday July 15 (and later times to be determined)
+in the Riley Room for a discussion group dealing with some elements of the
+scientific practice, with an emphasis on computation. The focus will likely be
+on the R language, which made the figure below.  How that was done -- and how
+this poster was created -- will be explained in the first AMORE session.
+
+```{r echo = FALSE, results = "hide"}
+library(ncdf4)
+suppressPackageStartupMessages(library(oce))
+# Get most recent image (previous day at 1800 UTC)
+time <- paste0(gsub("-", "", Sys.Date() - 1), "T18Z")
+uurl <- paste0(
+    "https://dd.weather.gc.ca/model_ciops/east/2km/18/048/",
+    time, "_MSC_CIOPS-East_SeaWaterVelocityX_DBS-0.5m_LatLon0.03x0.02_PT048H.nc"
+)
+vurl <- paste0(
+    "https://dd.weather.gc.ca/model_ciops/east/2km/18/048/",
+    time, "_MSC_CIOPS-East_SeaWaterVelocityY_DBS-0.5m_LatLon0.03x0.02_PT048H.nc"
+)
+ufile <- gsub(".*/", "", uurl)
+vfile <- gsub(".*/", "", vurl)
+# Do not re-download files that already exist
+if (!file.exists(ufile)) download.file(uurl, ufile)
+if (!file.exists(vfile)) download.file(vurl, vfile)
+# Get the data
+unc <- nc_open(ufile)
+u <- ncvar_get(unc, "vozocrtx")
+vnc <- nc_open(vfile)
+v <- ncvar_get(vnc, "vomecrty")
+speed <- sqrt(u^2 + v^2)
+longitude <- ncvar_get(unc, "longitude")
+latitude <- ncvar_get(unc, "latitude")
+# Plot, using an aspect ratio that yields correct shapes at middle latitude
+if (!interactive()) {
+    png("eccc_speed.png", unit = "in", width = 7, height = 4.7, res = 140, pointsize = 9)
+}
+asp <- 1 / cospi(mean(range(latitude) / 180))
+eps <- 0.01 # trim out highest and lowest 1 percent
+zlim <- quantile(speed, c(eps, 1 - eps), na.rm = TRUE)
+cm <- colormap(zlim = zlim, col = oceColorsTurbo)
+imagep(longitude, latitude, speed,
+    asp = asp, colormap = cm,
+    missingColor = "lightgray", mar = c(2, 2, 1, 1),
+    decimate = FALSE
+)
+mtext(sprintf("Modelled Sea Surface Speed [m/s] at time %s", time), line = 0.1)
+if (!interactive()) {
+    dev.off()
+}
+```
+
+![Ocean surface current predicted by an ECCC model.](eccc_speed.png)
+
