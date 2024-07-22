@@ -1,0 +1,16 @@
+---
+title: "Notes from AMORE meeting 1"
+date: "2024-07-17"
+output: pdf_document
+author: Giulia Cerny Oliveira
+---
+
+**Summary**
+
+Discussion included the following topics.
+
+* Use of paper notebooks
+* The markdown file format
+* The terminal and Unix tools
+* The Zotero citation manager
+* Working with github.com and, more generally, with git
