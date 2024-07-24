@@ -1,0 +1,15 @@
+---
+title: "Notes from AMORE meeting 2"
+author: "Giulia Cerny Oliveira"
+date: "2024-07-23"
+output: pdf_document
+---
+
+**Summary**
+
+Discussion included the following topics.
+
+* Using the GitHub Desktop application
+* Working with git on the terminal
+* Forking and cloning a repository
+* Demo working with NetCDF file and AMSR satellite image
